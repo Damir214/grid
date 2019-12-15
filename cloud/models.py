@@ -9,4 +9,4 @@ class Tasks(models.Model):
     max_eig_value = models.CharField(max_length=300, blank=True)
     calculation_time = models.CharField(max_length=300, blank=True)
     size = models.IntegerField(default=1)
-    done = models.BooleanField(default=True, blank=False)
+    done = models.BooleanField(default=False, blank=False)

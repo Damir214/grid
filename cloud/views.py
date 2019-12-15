@@ -2,10 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http.response import HttpResponse
 from django.contrib.auth import authenticate, logout, login
-from datetime import datetime
-from scipy.linalg import eigvals
+import subprocess
 from . import models
-import numpy as np
 
 
 def hello(request):
@@ -32,28 +30,21 @@ def signup(request):
         except:
             pass
 
-        return redirect('/calc_eig')
+        return redirect('/signin')
 
     return render(request, 'cloud/signup.html')
 
 
 def calc_eig(request):
-    start = datetime.now()
     # send request to db
     tasks = models.Tasks.objects.filter(user=request.user)
     done_tasks = [task for task in tasks if task.done]
     undone_tasks = [task for task in tasks if not task.done]
-    A = np.random.randn(300, 300)
-    eig_vector = eigvals(A)
-    answer = np.max(eig_vector)
     # the end
-    end = datetime.now()
     return render(
         request,
         'cloud/task.html',
         {
-            'eig_value': str(answer),
-            'execution_time': str(end - start),
             'done_tasks': done_tasks,
             'undone_tasks': undone_tasks,
         },
@@ -69,7 +60,7 @@ def save_task(request):
 
     tasks = models.Tasks.objects.all()
 
-    if len(tasks) > 5:
-        ...
+    if len(tasks) > 1:
+        subprocess.Popen('bash run_calculations.sh', shell=True)
 
     return redirect('/calc_eig')
