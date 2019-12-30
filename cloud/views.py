@@ -6,18 +6,25 @@ import subprocess
 from . import models
 
 
-def hello(request):
-    return HttpResponse('O, piet')
+def happy_new_year(request):
+
+    return render(request, 'cloud/happy_new_year.html')
 
 
 def signin(request):
     if request.method == 'POST':
-        user = authenticate(username=request.POST['user'], password=request.POST['pass'])
+        user = authenticate(
+            username=request.POST['user'], password=request.POST['pass'],
+        )
         if user and user.is_active == True:
             login(request, user)
             return redirect('/calc_eig')
         else:
-            return render(request, 'cloud/singin.html', {'message': 'Неверный логин или пароль'})
+            return render(
+                request,
+                'cloud/singin.html',
+                {'message': 'Неверный логин или пароль'},
+            )
 
     return render(request, 'cloud/singin.html')
 
@@ -25,7 +32,9 @@ def signin(request):
 def signup(request):
     if request.method == 'POST':
         try:
-            user = models.User.objects.create_user(username=request.POST['user'], password=request.POST['pass'])
+            user = models.User.objects.create_user(
+                username=request.POST['user'], password=request.POST['pass'],
+            )
             user.save()
         except:
             pass
@@ -44,10 +53,7 @@ def calc_eig(request):
     return render(
         request,
         'cloud/task.html',
-        {
-            'done_tasks': done_tasks,
-            'undone_tasks': undone_tasks,
-        },
+        {'done_tasks': done_tasks, 'undone_tasks': undone_tasks},
     )
 
 

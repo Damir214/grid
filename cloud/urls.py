@@ -16,4 +16,10 @@ Including another URLconf
 from . import views
 from django.urls import path
 
-urlpatterns = [path('calc_eig/', views.calc_eig), path('save_task/', views.save_task), path('signin/', views.signin), path('', views.signin), path('signup/', views.signup)]
+urlpatterns = [
+    path('calc_eig/', views.calc_eig),
+    path('save_task/', views.save_task),
+    path('signin/', views.signin),
+    path('', views.happy_new_year),
+    path('signup/', views.signup),
+]
