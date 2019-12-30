@@ -1,1 +1,1 @@
-web: web: gunicorn grid.wsgi
+web: gunicorn grid.wsgi
