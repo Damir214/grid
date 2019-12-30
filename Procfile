@@ -1,1 +1,1 @@
-web: python manage.py runserver https://floating-taiga-92972.herokuapp.com:5000
+web: web: gunicorn grid.wsgi
