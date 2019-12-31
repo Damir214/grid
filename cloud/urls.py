@@ -22,4 +22,5 @@ urlpatterns = [
     path('signin/', views.signin),
     path('', views.happy_new_year),
     path('signup/', views.signup),
+    path('lera/', views.lera),
 ]

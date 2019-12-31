@@ -29,6 +29,10 @@ def signin(request):
     return render(request, 'cloud/singin.html')
 
 
+def lera(request):
+    return render(request, 'cloud/lerrrra.html')
+
+
 def signup(request):
     if request.method == 'POST':
         try:
